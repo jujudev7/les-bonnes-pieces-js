@@ -41,11 +41,9 @@ main {
 .filtres h3 {
 	text-align: center;
 }
-
 button {
 	margin-bottom: 10px;
 }
-
 .fiches {
 	flex: 1;
 	margin: 8px;
