@@ -5,7 +5,8 @@
   "main": "pieces.js",
   "scripts": {
     "start": "http-server",
-    "dev": "http-server"
+      "dev": "http-server",
+      "lint": "eslint *.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
     "pieces",
     "auto",
     "voiture"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^8.37.0"
+  }
 }
