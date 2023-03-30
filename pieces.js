@@ -1,4 +1,4 @@
-import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherAvis } from "./avis.js";
+import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherAvis, afficherGraphiqueAvis } from "./avis.js";
 //Récupération des pièces eventuellement stockées dans le localStorage
 let pieces = window.localStorage.getItem("pieces");
 
@@ -7,7 +7,7 @@ if (pieces === null) {
   // const reponse = await fetch("pieces-autos.json");
   // Récupération des pièces depuis l'API'
   const reponse = await fetch("http://localhost:8081/pieces");
-  const pieces = await reponse.json();
+  pieces = await reponse.json();
   // Transformation des pièces en JSON
   const valeurPieces = JSON.stringify(pieces);
   // Stockage des informations dans le localStorage
@@ -49,7 +49,7 @@ function genererPieces(pieces) {
     avisBouton.dataset.id = article.id;
     avisBouton.textContent = "Afficher les avis";
 
-    // On rattache la balise article a la section Fiches
+    // On rattache la balise article à la section Fiches
     sectionFiches.appendChild(pieceElement);
     // On rattache l’image à pieceElement (la balise article)
     pieceElement.appendChild(imageElement);
@@ -123,7 +123,7 @@ boutonDecroissant.addEventListener("click", function () {
   genererPieces(piecesOrdonnees);
 });
 
-const noms = pieces.map((piece) => piece.nom);
+const noms = pieces.map(piece => piece.nom);
 for (let i = pieces.length - 1; i >= 0; i--) {
   if (pieces[i].prix > 35) {
     noms.splice(i, 1);
@@ -133,7 +133,7 @@ console.log(noms);
 
 //Création de l'en-tête
 const pElement = document.createElement("p");
-
+pElement.innerText = "Pièces abordables";
 //Création de la liste des pièces abordables
 const abordablesElements = document.createElement("ul");
 //Ajout de chaque nom à la liste
@@ -149,8 +149,8 @@ document
   .appendChild(abordablesElements);
 
 // Afficher une description des pièces disponibles et de leur prix
-const nomsDisponibles = pieces.map((piece) => piece.nom);
-const prixDisponibles = pieces.map((piece) => piece.prix);
+const nomsDisponibles = pieces.map(piece => piece.nom);
+const prixDisponibles = pieces.map(piece => piece.prix);
 
 for (let i = pieces.length - 1; i >= 0; i--) {
   if (pieces[i].disponibilite === false) {
@@ -188,3 +188,5 @@ const boutonMettreAJour = document.querySelector(".btn-maj");
 boutonMettreAJour.addEventListener("click", function () {
    window.localStorage.removeItem("pieces");
 });
+
+await afficherGraphiqueAvis();
